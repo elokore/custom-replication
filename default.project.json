@@ -1,0 +1,49 @@
+{
+  "name": "custom-replication",
+  "tree": {
+    "$className": "DataModel",
+
+    "Workspace": {
+      "$path": "assets/Workspace"
+    },
+
+    "ReplicatedStorage": {
+      "Common": {
+        "$path": "src/shared"
+      },
+      "Rigs": {
+        "$path": "assets/ReplicatedStorage/Rigs"
+      }
+    },
+
+    "ServerScriptService": {
+      "Server": {
+        "$path": "src/server"
+      }
+    },
+
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "Client": {
+          "$path": "src/client"
+        }
+      }
+    },
+
+    "Lighting": {
+      "$path": "assets/Lighting",
+      "$properties": {
+        "Ambient": [
+          0.27450980392, 
+          0.27450980392, 
+          0.27450980392
+        ],
+        "Brightness": 3,
+        "GlobalShadows": true,
+        "Technology": "ShadowMap",
+        "EnvironmentDiffuseScale": 1,
+        "EnvironmentSpecularScale": 1
+      }
+    }
+  }
+}
