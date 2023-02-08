@@ -35,5 +35,5 @@ jobs:
       - uses: JohnnyMorganz/stylua-action@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          version: "v2.0.0"
+          version: "v0.16.0"
           args: --check ./src
