@@ -46,6 +46,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - run: | 
+        if (![string]::IsNullOrEmpty("${{ secrets.ROBLOSECURITY }}")) {
+          python tests/scripts/install.py "${{ secrets.ROBLOSECURITY }}"
+        } else {
+          echo"No token could be found"
+        }
+
       - name: Install Roblox Studio
         uses: OrbitalOwen/roblox-win-installer-action@1.1
         with:
