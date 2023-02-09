@@ -1,3 +1,4 @@
+--# selene: allow(undefined_variable) --Making an exception here so Selene doesn't complain about 'remodel' global variable
 --[[
 	This script pulls assets from a Roblox place file and stores them in the repository assets folder for use in a rojo fully managed workflow.
 	This script does NOT run inside of Roblox Studio and is using normal Lua instead of Roblox's Luau. As a result, old keywords like ipairs and pairs
@@ -22,9 +23,8 @@ local game = remodel.readPlaceFile("places/development.rbxlx")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Lighting = game:GetService("Lighting")
 
-
 local replicatedStorageContainers = {
-	ReplicatedStorage.Rigs
+	ReplicatedStorage.Rigs,
 }
 
 local function isScript(object)
@@ -35,12 +35,9 @@ local function writeValidChildren(object, path)
 	remodel.createDirAll(path)
 
 	for _, child in ipairs(object:GetChildren()) do
-		if not isScript(child) then
-			remodel.writeModelFile(path .. child.Name .. ".rbxmx", child)
-		end
+		if not isScript(child) then remodel.writeModelFile(path .. child.Name .. ".rbxmx", child) end
 	end
 end
-
 
 for _, container in ipairs(replicatedStorageContainers) do
 	writeValidChildren(container, "assets/ReplicatedStorage/" .. container.Name .. "/")
