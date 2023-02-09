@@ -45,11 +45,25 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          submodules: true
 
       - name: Install Roblox Studio
         uses: OrbitalOwen/roblox-win-installer-action@1.1
         with:
           cookie: ${{ secrets.ROBLOSECURITY }}
           token: ${{ secrets.GITHUB_TOKEN }} 
+
+      - name: Install Foreman
+        uses: Roblox/setup-foreman@v1
+        with:
+          version: "1.1.0"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Roblox test place
+        run: rojo build unitTesting.project.json -o places/unitTestingBuild.rbxlx
+
+      - name: Run tests
+        run: run-in-roblox --place places/unitTestingBuild.rbxlx --script tests/TestBootstrap.server.lua
+        continue-on-error: true
+        timeout-minutes: 3
+
+      

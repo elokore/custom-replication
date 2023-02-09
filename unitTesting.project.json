@@ -8,7 +8,7 @@
         "$path": "src/shared"
       },
       "TestEZ": {
-        "$path": "submodules/testez/src"
+        "$path": "TestEZ"
       },
       "UnitTests": {
         "$path": "tests"
