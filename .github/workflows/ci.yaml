@@ -41,7 +41,7 @@ jobs:
   tests:
     name: Unit Tests
     runs-on: windows-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -63,7 +63,5 @@ jobs:
 
       - name: Run tests
         run: run-in-roblox --place places/unitTestingBuild.rbxlx --script tests/TestBootstrap.server.lua
-        continue-on-error: true
-        timeout-minutes: 3
 
       
