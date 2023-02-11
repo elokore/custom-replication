@@ -10,15 +10,17 @@
       <Item class="ModuleScript" referent="2">
         <Properties>
           <string name="Name">SplitterModule</string>
-          <string name="Source">local module = {}
+          <string name="Source"><![CDATA[local module = {}
 
-function module.splitNumber(x: number) : (number, number)
-    local n1: number = bit32.band(x, 0b_0000_1111)
-    local n2: number = bit32.rshift(bit32.band(x, 0b_1111_0000), 4)
-    return n1, n2
+function module.splitNumber(x: number): (number, number)
+	local n1: number = bit32.band(x, 0b_0000_1111)
+	local n2: number = bit32.rshift(bit32.band(x, 0b_1111_0000), 4)
+
+	return n1, n2
 end
 
-return module</string>
+return module
+]]></string>
         </Properties>
       </Item>
     </Item>
@@ -1988,15 +1990,15 @@ return TestSession
         <Properties>
           <string name="Name">SplitterModule.spec</string>
           <string name="Source"><![CDATA[return function()
-    local splitter = require(game.ReplicatedStorage.Common.SplitterModule)
+	local splitter = require(game.ReplicatedStorage.Common.SplitterModule)
 
-    describe("SplitterModule", function()
-        it("Should take the first 8 bits and split it in half into two 4-bit numbers", function()
-            local n1: number, n2: number = splitter.splitNumber(255)
-            expect(n1).to.equal(15)
-            expect(n2).to.equal(12)
-        end)
-    end)
+	describe("SplitterModule", function()
+		it("Should take the first 8 bits and split it in half into two 4-bit numbers", function()
+			local n1: number, n2: number = splitter.splitNumber(255)
+			expect(n1).to.equal(15)
+			expect(n2).to.equal(12)
+		end)
+	end)
 end
 ]]></string>
         </Properties>
@@ -2025,7 +2027,8 @@ end</string>
     <Item class="Script" referent="23">
       <Properties>
         <string name="Name">Server</string>
-        <string name="Source">print("Hello world, from server!")</string>
+        <string name="Source"><![CDATA[print("Hello world, from server!")
+]]></string>
       </Properties>
     </Item>
   </Item>
@@ -2040,7 +2043,8 @@ end</string>
       <Item class="LocalScript" referent="26">
         <Properties>
           <string name="Name">Client</string>
-          <string name="Source">print("Hello world, from client!")</string>
+          <string name="Source"><![CDATA[print("Hello world, from client!")
+]]></string>
         </Properties>
       </Item>
     </Item>

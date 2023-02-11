@@ -37,3 +37,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: "v0.16.0"
           args: --check ./src
+      
