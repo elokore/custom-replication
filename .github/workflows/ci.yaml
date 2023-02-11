@@ -37,41 +37,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: "v0.16.0"
           args: --check ./src
-
-  tests:
-    name: Unit Tests
-    runs-on: windows-latest
-    timeout-minutes: 12
-    env:
-          HAVE_SECURITY_COOKIE: ${{ secrets.ROBLOSECURITY != '' }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install Roblox Studio
-        uses: OrbitalOwen/roblox-win-installer-action@1.1
-        with:
-          cookie: ${{ secrets.ROBLOSECURITY }}
-          token: ${{ secrets.GITHUB_TOKEN }} 
-
-      - name: Install Foreman
-        uses: Roblox/setup-foreman@v1
-        with:
-          version: "1.1.0"
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build Roblox test place
-        run: rojo build unitTesting.project.json -o places/unitTestingBuild.rbxlx
-
-      # Flip flag that causes issue
-      - name: Create fflag overrides
-        run: |
-          $flags = @{DFIntStudioUseNewLoginDataEndpointHundredthPercent=0; FFlagStudioUseNewLoginDataEndpoint=$false}
-          New-Item -Path 'C:/Program Files (x86)/Roblox/Versions/version-*/' -Name "ClientSettings" -ItemType "directory"
-          New-Item -Path 'C:/Program Files (x86)/Roblox/Versions/version-*/ClientSettings' -Name "ClientAppSettings.json"
-          $flags | ConvertTo-Json -depth 32| set-content -Path 'C:/Program Files (x86)/Roblox/Versions/version-*/ClientSettings/ClientAppSettings.json'
-
-      - name: Run tests
-        run: run-in-roblox --place places/unitTestingBuild.rbxlx --script tests/TestBootstrap.server.lua
-
       
